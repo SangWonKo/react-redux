@@ -1,3 +1,9 @@
+export class Component {
+  constructor(props) {
+    this.props = props;
+  }
+}
+
 export function createDOM(node) {
   if (typeof node === "string") {
     return document.createTextNode(node);
@@ -12,18 +18,26 @@ export function createDOM(node) {
   return element;
 }
 
+function makeProps(props, children) {
+  return {
+    ...props,
+    children: children.length === 1 ? children[0] : children,
+  };
+}
+
 export function createElement(tag, props, ...children) {
   props = props || {}; //props가 null일 경우에 대한 방어 코드
-
+  
   if (typeof tag === "function") {
-    //tag가 함수 컴포넌트일 경우엔 return값 가져옴
-    if (children.length > 0) {
-      return tag({
-        ...props,
-        children: children.length === 1 ? children[0] : children,
-      });
+    if (tag.prototype instanceof Component) { //클래스 컴포넌트일 경우 
+      const instance = new tag(makeProps(props, children));
+      return instance.render();
     } else {
-      return tag(props);
+      if (children.length > 0) { //tag가 함수 컴포넌트일 경우엔 return값 가져옴
+        return tag(makeProps(props, children));
+      } else {
+        return tag(props);
+      }
     }
   } else {
     return { tag, props, children };

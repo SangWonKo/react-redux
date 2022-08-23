@@ -1,17 +1,23 @@
 /* @jsx createElement */
-import { createElement, render } from "./react";
+import { createElement, render, Component } from "./react";
 
-function Title(props) {
-  return <h1>{props.children}</h1>
+class Title extends Component {
+  render() {
+    return <h1>{this.props.children}</h1>
+  }
 }
+
+// function Title(props) {
+//   return <h1>{props.children}</h1>
+// }
 
 function Item(props) {
   return <li style={`color: ${props.color}`}>{props.children}</li>
 }
 
 //html 마크업 구조를 사용할수 있도록 babel을 사용하여 jsx createElement 호출 구문으로 변환
-const vdom = <p>
-  <Title>React 잘 만들기</Title>
+const App = () => <p>
+  <Title>React 정말 클래스 컴포넌트 잘 만들기</Title>
   <ul>
     <Item color="red">첫 번째 아이템</Item>
     <Item color="blue">두 번째 아이템</Item>
@@ -19,4 +25,4 @@ const vdom = <p>
   </ul>
 </p>
 
-render(vdom, document.querySelector("#root"));
+render(<App />, document.querySelector("#root"));
