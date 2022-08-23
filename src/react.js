@@ -13,8 +13,21 @@ export function createDOM(node) {
 }
 
 export function createElement(tag, props, ...children) {
-  props = props || {};  //props가 null일 경우에 대한 방어 코드
-  return { tag, props, children };
+  props = props || {}; //props가 null일 경우에 대한 방어 코드
+
+  if (typeof tag === "function") {
+    //tag가 함수 컴포넌트일 경우엔 return값 가져옴
+    if (children.length > 0) {
+      return tag({
+        ...props,
+        children: children.length === 1 ? children[0] : children,
+      });
+    } else {
+      return tag(props);
+    }
+  } else {
+    return { tag, props, children };
+  }
 }
 
 export function render(vdom, container) {
