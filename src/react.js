@@ -13,6 +13,7 @@ export function createDOM(node) {
 }
 
 export function createElement(tag, props, ...children) {
+  props = props || {};  //props가 null일 경우에 대한 방어 코드
   return { tag, props, children };
 }
 
