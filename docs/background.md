@@ -30,12 +30,14 @@ SPA는 하나의 어플리케이션이기 때문에 규모가 커질수록 복�
 
 ### MVC (Model-View-Controller)
 ![mvc](https://images.velog.io/images/jeongopo/post/141a7081-9f59-47c0-a29a-e6a8e4e1302e/image.png)
+
 모델과 뷰 사이 간의 연결성 로직들을 분리해서 복잡성을 낮춤 
 
 하지만 클라이언트 어플리케이션의 뷰와 로직들이 늘어나면서 모델이 서버의 모델에 종속성을 가지게 되는 문제가 있음
 
 ### MVVM (Model-View-ViewModel)
 ![mvc](https://upload.wikimedia.org/wikipedia/commons/8/87/MVVMPattern.png)
+
 클라이언트쪽에서 상태를 독립적으로 유지할 수 있는 패턴
 React와 같은 프레임워크에 큰 영향을 미친 패턴
 
