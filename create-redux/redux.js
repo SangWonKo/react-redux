@@ -1,6 +1,6 @@
 export const actionCreator = (type) => (payload) => ({ type, payload });
 
-export function createStore(reducer) {
+export function createStore(reducer, middlewares = []) {
   let state;
   let handlers = []; //구독기
 
@@ -9,13 +9,28 @@ export function createStore(reducer) {
     handlers.forEach((handler) => handler());
   }
 
-  function subscribe(handler) {
-    handlers.push(handler);
-  }
-
   function getState() {
     return state;
   }
 
-  return { dispatch, getState, subscribe };
+  function subscribe(handler) {
+    handlers.push(handler);
+  }
+
+  const store = {
+    getState,
+    subscribe,
+    dispatch,
+  };
+  
+  middlewares = Array.from(middlewares).reverse();
+  //미들웨어의 파이프라인에 따라 마지막 미들웨어의 결과값이 디스패치가 되어 호출되는 구조 (Monkey patching)
+  let lastDispatch = dispatch;
+
+  middlewares.forEach((middleware) => {
+    lastDispatch = middleware(store)(lastDispatch);
+  });
+
+  store.dispatch = lastDispatch;
+  return store;
 }
