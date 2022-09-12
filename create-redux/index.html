@@ -4,9 +4,38 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>3.4 그럴듯하게 모양 내기</title>
+  <title>4.1 컨셉의 한계와 돌파구</title>
+  <style>
+		main {
+			padding: 3em;
+		}
+
+		#counter { 
+			font-size: 124px;
+			font-weight: bolder;
+		}
+
+		button {
+			padding: 1em;
+			margin-right: 1em;
+		}
+	</style>
 </head>
 <body>
+  <main>
+		<header>
+			<h1>4.1 카운터 앱</h1>
+		</header>
+		<section>
+			<p id="counter"></p>
+			<div>
+				<button id="btn-increase">증가</button>
+				<button id="btn-async-increase">비동기 증가</button>
+				<button id="btn-decrease">감소</button>
+				<button id="btn-reset">리셋</button>
+			</div>
+		</section>
+	</main>
  <!-- type module: 여러개의 파일들을 es6 module 스펙대로 런타임에 네이티브하게 읽어오기 위함  -->
   <script src="app.js" type="module"></script>
 </body>
